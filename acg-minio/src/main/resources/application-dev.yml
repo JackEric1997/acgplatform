@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    username: root
+    password: MyNewPass@123
+    url: jdbc:mysql://192.168.0.101:3306/authority?useSSL=true&serverTimezone=UTC
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+server:
+  port: 8081
+#minio文件系统
+minio:
+  endpoint: http://192.168.0.109:9000
+  accessKey: minioadmin
+  secretKey: minioadmin
+  bucketName: acgplatform

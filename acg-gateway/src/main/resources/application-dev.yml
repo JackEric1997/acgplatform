@@ -1,0 +1,42 @@
+server:
+  port: 8083
+spring:
+  datasource:
+    username: root
+    # password: MyNewPass@123
+    password: root
+    # url: jdbc:mysql://127.0.0.1:3306/authority?useSSL=true&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/blog?useSSL=true&serverTimezone=UTC
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+  #redis连接
+  redis:
+    host: 192.168.0.109
+    port: 6379
+    database: 0
+    timeout: 1800000
+    lettuce:
+      pool:
+        max-active: 20
+        #最大阻塞等待时间（负数表示没有限制）
+        max-wait: -1
+        max-idle: 5
+        #最小空闲
+        min-idle: 0
+  #nacos服务地址
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.0.109:8848
+
+    gateway:
+      #使用服务发现路由
+      discovery:
+        locator:
+          enabled: true
+      routes[0]:
+        id: acg_gateway #配置路由规则
+        url: lb://acg_gateway #设置路由uri lb://注册服务名称
+        predicates: Path=/*/auth/** #具体路径规则
